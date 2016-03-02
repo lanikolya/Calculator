@@ -50,7 +50,7 @@ public class Main {
         String sub = "-";
         String multi = "*";
         String div = "/";
-        if (!action.equals(sum) && action.equals(sub) && action.equals(multi) && action.equals(div)) {
+        if (!action.equals(sum) && !action.equals(sub) && !action.equals(multi) && !action.equals(div)) {
             System.out.println("Incorrect enter");
             restart();
         }else if (action.equals(q)) {
