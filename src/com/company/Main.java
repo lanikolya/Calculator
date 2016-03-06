@@ -6,125 +6,204 @@ public class Main {
 
     public static void main(String[] args) {
         hello();
-        String number1 = enterTheFirstNumber();
-        validationOfEnter1(number1);
-        String action = selectAction();
-        validationOfEnter2(action);
-        String number2 = enterTheSecondNumber();
-        validationOfEnter3(number2);
-        process(action, number1, number2);
+        boolean result = computing();
+        quit(result);
     }
 
     public static void hello() {
         System.out.println("Hello! Let`s start");
+        System.out.println();
+    }
+
+    public static void listOfOparetion() {
+        System.out.println("You can use these operations:");
+        System.out.print("Sum enter 1" + "\t" + "\t");
+        System.out.print("Subtraction enter 2" + "\t" + "\t");
+        System.out.print("Multiplication enter 3" + "\t" + "\t");
+        System.out.println("division enter 4" + "\t" + "\t");
+        System.out.print("power enter 5" + "\t" + "\t");
+        System.out.print("cos enter 6" + "\t" + "\t");
+        System.out.print("sin enter 7" + "\t" + "\t");
+        System.out.println("If You want to quit write <<quit>>");
+        System.out.println();
     }
 
     public static String enterTheFirstNumber() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the first number");
         return scanner.next();
     }
 
     public static String selectAction() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Select an action");
+        System.out.println("Select an operation");
         return scanner.next();
     }
 
     public static String enterTheSecondNumber() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the second number");
         return scanner.next();
     }
 
-        public static void validationOfEnter1(String number1) {
-        String q = "quit";
-        if (number1.equals(q)) {
-            quit();
+    public static void quit(boolean m) {
+        if (m == false) {
+            System.out.println("Good by!");
         }
     }
 
-    public static void validationOfEnter2(String action) {
-        String q = "quit";
-        String sum = "+";
-        String sub = "-";
-        String multi = "*";
-        String div = "/";
-        if (!action.equals(sum) && !action.equals(sub) && !action.equals(multi) && !action.equals(div)) {
-            System.out.println("Incorrect enter");
-            restart();
-        }else if (action.equals(q)) {
-            quit();
+    public static boolean computing() {
+        listOfOparetion();
+        String action = selectAction();
+        if (action.equals("quit")) {
+            return false;
         }
+
+        boolean res;
+        if (action.equals("1")) {
+            res = sum();
+            if (action.equals("quit")) {
+                return false;
+            }
+        } else if (action.equals("2")) {
+            res = subtraction();
+            if (action.equals("quit")) {
+                return false;
+            }
+        } else if (action.equals("3")) {
+            res = multiplication();
+            if (action.equals("quit")) {
+                return false;
+            }
+        } else if (action.equals("4")) {
+            res = division();
+            if (action.equals("quit")) {
+                return false;
+            }
+        } else if (action.equals("5")) {
+            res = pow();
+            if (action.equals("quit")) {
+                return false;
+            }
+            //        } else if (action.equals(6)) {
+//            cos();
+//        } else if (action.equals(7)) {
+//            sin();
+        } else {
+            System.out.println("You entered unknown operation");
+            return computing();
+        }
+        return res;
     }
 
-    public static void validationOfEnter3(String number2) {
-        String q = "quit";
-        if (number2.equals(q)) {
-            quit();
+
+    public static boolean sum() {
+        System.out.println("Enter the first summand");
+        String summand1 = enterTheFirstNumber();
+        if (summand1.equals("quit")) {
+            return false;
         }
-    }
-
-
-    public static void process(String action, String nomber1, String nomber2) {
-        double n1 = Double.parseDouble(nomber1);
-        double n2 = Double.parseDouble(nomber2);
-        String sum = "+";
-        String sub = "-";
-        String multi = "*";
-        String div = "/";
-        String q = "Quit";
-        if (action.equals(sum)) {
-            sum(n1, n2);
-        } else if (action.equals(sub)) {
-            subtraction(n1, n2);
-        } else if (action.equals(multi)) {
-            multiplication(n1, n2);
-        } else if (action.equals(div)) {
-            division(n1, n2);
+        double n1 = Double.parseDouble(summand1);
+        System.out.println("Enter the second summand");
+        String summand2 = enterTheSecondNumber();
+        if (summand2.equals("quit")) {
+            return false;
         }
-    }
-
-    public static void sum(double n1, double n2) {
+        double n2 = Double.parseDouble(summand2);
         double sum = n1 + n2;
         System.out.print("Sum:" + "\t");
         System.out.println(sum);
-        restart();
+        return computing();
     }
 
-    public static void subtraction(double n1, double n2) {
+
+    public static boolean subtraction() {
+        System.out.println("Enter the minuend");
+        String minuend = enterTheFirstNumber();
+        if (minuend.equals("quit")) {
+            return false;
+        }
+        double n1 = Double.parseDouble(minuend);
+        System.out.println("Enter the subtrahend");
+        String subtrahend = enterTheSecondNumber();
+        if (subtrahend.equals("quit")) {
+            return false;
+        }
+        double n2 = Double.parseDouble(subtrahend);
         double sub = n1 - n2;
         System.out.print("subtraction:" + "\t");
         System.out.println(sub);
-        restart();
+        return computing();
     }
 
-    public static void multiplication(double n1, double n2) {
+    public static boolean multiplication() {
+        System.out.println("Enter the multiplicand");
+        String multiplicand = enterTheFirstNumber();
+        if (multiplicand.equals("quit")) {
+            return false;
+        }
+        double n1 = Double.parseDouble(multiplicand);
+        System.out.println("Enter the multiplier");
+        String multiplier = enterTheSecondNumber();
+        if (multiplier.equals("quit")) {
+            return false;
+        }
+        double n2 = Double.parseDouble(multiplier);
         double multi = n1 * n2;
         System.out.print("multiplication:" + "\t");
         System.out.println(multi);
-        restart();
+        return computing();
     }
 
-    public static void division(double n1, double n2) {
+    public static boolean division() {
+        System.out.println("Enter the dividend");
+        String divident = enterTheFirstNumber();
+        if (divident.equals("quit")) {
+            return false;
+        }
+        double n1 = Double.parseDouble(divident);
+        System.out.println("Enter the divider");
+        String divider = enterTheSecondNumber();
+        if (divider.equals("quit")) {
+            return false;
+        }
+        double n2 = Double.parseDouble(divider);
         double div = n1 / n2;
         System.out.print("division:" + "\t");
         System.out.println(div);
-        restart();
+        return computing();
     }
 
-    public static void quit() {
-        System.out.println("Good by!");
+    public static boolean pow() {
+        System.out.println("Enter a number, wich erected in power");
+        String number = enterTheFirstNumber();
+        if (number.equals("quit")) {
+            return false;
+        }
+        int n1 = Integer.parseInt(number);
+        System.out.println("Enter the power");
+        String power = enterTheSecondNumber();
+        if (power.equals("quit")) {
+            return false;
+        }
+        int n2 = Integer.parseInt(power);
+        int res = 1;
+        int[] mas = new int[n2];
+        for (int i = 0; i < mas.length; i++) {
+            mas[i] = n1;
+        }
+        for (int i = 0; i < mas.length; i++) {
+            res = res * mas[i];
+        }
+        System.out.print("Answer:" + "\t");
+        System.out.println(res);
+        return computing();
     }
 
-    public static void restart() {
-        String number1 = enterTheFirstNumber();
-        validationOfEnter1(number1);
-        String action = selectAction();
-        validationOfEnter2(action);
-        String number2 = enterTheSecondNumber();
-        validationOfEnter3(number2);
-        process(action, number1, number2);
+//    public static boolean cos(){
+//
+//    }
+//
+//    public static boolean sin(){
+//
+//    }
 
-    }
 }
