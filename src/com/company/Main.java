@@ -100,7 +100,7 @@ public class Main {
         return res;
     }
 
-
+ 
     public static boolean sum() {
         System.out.println("Enter the first summand");
         String summand1 = enterTheFirstNumber();
